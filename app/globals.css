@@ -1,0 +1,130 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sora), var(--font-sans);
+  --font-sans: var(--font-geist-sans), 'Geist Fallback';
+  --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-cyan: var(--cyan);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+
+  --animate-marquee: marquee 32s linear infinite;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Brand */
+  --navy-deep: #000b22;
+  --navy: #001540;
+  --cyan: #57c5e8;
+
+  --background: #00091c;
+  --foreground: #eef4fb;
+
+  --card: #021a3f;
+  --card-foreground: #eef4fb;
+
+  --popover: #021a3f;
+  --popover-foreground: #eef4fb;
+
+  --primary: #57c5e8;
+  --primary-foreground: #00102e;
+
+  --secondary: #0a234f;
+  --secondary-foreground: #eef4fb;
+
+  --muted: #0a1c3d;
+  --muted-foreground: #8aa2c4;
+
+  --accent: #0d2c5e;
+  --accent-foreground: #eef4fb;
+
+  --destructive: oklch(0.62 0.21 25);
+
+  --border: rgba(87, 197, 232, 0.14);
+  --input: rgba(87, 197, 232, 0.18);
+  --ring: #57c5e8;
+
+  --radius: 0.875rem;
+}
+
+@theme inline {
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(2, 26, 63, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(87, 197, 232, 0.14);
+  }
+  .glass-strong {
+    background: rgba(2, 26, 63, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(87, 197, 232, 0.18);
+  }
+  .text-gradient {
+    background: linear-gradient(120deg, #eef4fb 0%, #57c5e8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glow-cyan {
+    box-shadow: 0 0 0 1px rgba(87, 197, 232, 0.25),
+      0 18px 60px -18px rgba(87, 197, 232, 0.55);
+  }
+}
