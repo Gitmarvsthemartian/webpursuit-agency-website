@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   title: 'WebPursuit — Websites That Generate Leads & Grow Businesses',
   description:
     'WebPursuit is a web design agency building high-converting custom websites, WordPress development, e-commerce, SEO, and ongoing support for small businesses and local service companies.',
+   icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-icon.png',
+  }, 
   generator: 'v0.app',
   keywords: [
     'web design agency',
