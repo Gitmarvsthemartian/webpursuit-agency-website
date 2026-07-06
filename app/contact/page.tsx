@@ -13,14 +13,14 @@ const contactDetails = [
   {
     icon: Mail,
     label: 'Email Us',
-    value: 'hello@webpursuit.com',
-    href: 'mailto:hello@webpursuit.com',
+    value: 'crietamarvin@gmail',
+    href: 'mailto:crietamarvin@gmail',
   },
   {
     icon: Phone,
     label: 'Call Us',
-    value: '(800) 555-1234',
-    href: 'tel:+18005551234',
+    value: '(+63) 997-6691021',
+    href: 'tel:+639976691021',
   },
   {
     icon: MapPin,

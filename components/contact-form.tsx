@@ -30,26 +30,38 @@ const [loading, setLoading] = useState(false)
     const form = e.currentTarget
     const formData = new FormData(form)
 
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.get('name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        service: formData.get('service'),
-        message: formData.get('message'),
-      }),
-    })
+  const response = await fetch('https://api.web3forms.com/submit', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  },
+  body: JSON.stringify({
+    access_key: '0a0f8014-b276-4cb2-944e-d1b0abf641cb',
 
-  if (response.ok) {
-    setSubmitted(true)
-    form.reset()
-  } else {
-    alert('Unable to send your message. Please try again.')
-  }
+    subject: 'New Website Inquiry',
+
+    from_name: formData.get('name'),
+
+    name: formData.get('name'),
+    email: formData.get('email'),
+    phone: formData.get('phone'),
+    service: formData.get('service'),
+    message: formData.get('message'),
+  }),
+})
+
+const result = await response.json()
+
+if (result.success) {
+  setSubmitted(true)
+  form.reset()
+} else {
+  console.error(result)
+  alert('Unable to send your message. Please try again.')
+}
+
+  
 } catch (error) {
     console.error(error)
     alert('Something went wrong. Please try again.')
