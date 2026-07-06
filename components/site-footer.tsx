@@ -11,7 +11,9 @@ const columns = [
       { href: '/services', label: 'Services' },
       { href: '/contact', label: 'Contact' },
     ],
+    
   },
+  
   {
     title: 'Services',
     links: [
@@ -22,6 +24,12 @@ const columns = [
     ],
   },
 ]
+
+const CONTACT = {
+  email: 'crietamarvin@yahoo.com',
+  phone: '+639976691021',
+  phoneDisplay: '+63 997 669 1021',
+}
 
 export function SiteFooter() {
   return (
@@ -37,18 +45,18 @@ export function SiteFooter() {
             </p>
             <div className="mt-6 space-y-3 text-sm">
               <a
-                href="mailto:hello@webpursuit.com"
+                href={'mailto:' + CONTACT.email}
                 className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-primary"
               >
                 <Mail className="size-4 text-primary" />
-                hello@webpursuit.com
+                 {CONTACT.email}
               </a>
               <a
-                href="tel:+18005551234"
+                href={`tel:${CONTACT.phone}`}
                 className="flex items-center gap-3 text-muted-foreground transition-colors hover:text-primary"
               >
                 <Phone className="size-4 text-primary" />
-                (800) 555-1234
+                {CONTACT.phoneDisplay}
               </a>
               <p className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="size-4 text-primary" />

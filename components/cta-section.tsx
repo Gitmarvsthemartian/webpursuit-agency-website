@@ -41,7 +41,7 @@ export function CtaSection() {
               >
                 <a href="tel:+18005551234">
                   <PhoneCall className="size-5" />
-                  (800) 555-1234
+                  (+63) 9976691021
                 </a>
               </Button>
             </div>

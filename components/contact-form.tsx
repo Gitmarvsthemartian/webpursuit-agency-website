@@ -19,26 +19,61 @@ const fieldClass =
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
+const [loading, setLoading] = useState(false)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault()
+
+  setLoading(true)
+
+  try {
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        service: formData.get('service'),
+        message: formData.get('message'),
+      }),
+    })
+
+  if (response.ok) {
     setSubmitted(true)
+    form.reset()
+  } else {
+    alert('Unable to send your message. Please try again.')
   }
+} catch (error) {
+    console.error(error)
+    alert('Something went wrong. Please try again.')
+  } finally {
+    setLoading(false)
+  }
+}
 
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-primary/30 glass p-10 text-center">
-        <CheckCircle2 className="size-14 text-primary" />
-        <h3 className="mt-5 font-heading text-2xl font-bold">
-          Thanks for reaching out!
-        </h3>
-        <p className="mt-2 max-w-sm text-muted-foreground">
-          We have received your request and a member of our team will get back
-          to you within one business day.
-        </p>
-      </div>
-    )
-  }
+if (submitted) {
+  return (
+    <div className="flex flex-col items-center justify-center rounded-2xl border border-primary/30 glass p-10 text-center">
+      <CheckCircle2 className="size-14 text-primary" />
+
+      <h3 className="mt-5 font-heading text-2xl font-bold">
+        Thanks for reaching out!
+      </h3>
+
+      <p className="mt-2 max-w-sm text-muted-foreground">
+        We have received your request and a member of our team will get back to
+        you within one business day.
+      </p>
+    </div>
+  )
+}
 
   return (
     <form
@@ -100,16 +135,22 @@ export function ContactForm() {
           >
             Service Needed
           </label>
-          <select id="service" name="service" className={fieldClass} required>
-            <option value="" disabled>
-              Select a service
-            </option>
-            {services.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
+          <select
+  id="service"
+  name="service"
+  className={fieldClass}
+  required
+  defaultValue=""
+>
+  <option value="" disabled>
+    Select a service
+  </option>
+  {services.map((s) => (
+    <option key={s} value={s}>
+      {s}
+    </option>
+  ))}
+</select>
         </div>
       </div>
 
@@ -131,13 +172,14 @@ export function ContactForm() {
       </div>
 
       <Button
-        type="submit"
-        size="lg"
-        className="mt-6 h-12 w-full rounded-xl text-base font-semibold"
-      >
-        Send Message
-        <Send className="size-4" />
-      </Button>
+  type="submit"
+  size="lg"
+  disabled={loading}
+  className="mt-6 h-12 w-full rounded-xl text-base font-semibold"
+>
+  {loading ? 'Sending...' : 'Send Message'}
+  {!loading && <Send className="size-4" />}
+</Button>
       <p className="mt-3 text-center text-xs text-muted-foreground">
         We typically respond within one business day.
       </p>
